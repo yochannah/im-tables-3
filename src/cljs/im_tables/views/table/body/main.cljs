@@ -27,8 +27,14 @@
         [tooltip
          [:td.cell
           {:on-mouse-enter (fn [] (dispatch [:main/summarize-item c]))
-           :style        {:position "relative"}
-           :data-content summary-table}
-          [:span (if value value [:i.fa.fa-ban.mostly-transparent])]]]))))
+           :style          {:position "relative"}
+           :data-content   summary-table}
+          [:span (if value value [:i.fa.fa-ban.mostly-transparent])]]]
+
+        [:td.cell
+         {:on-mouse-enter (fn [] (dispatch [:main/summarize-item c]))
+          :style          {:position "relative"}
+          :data-content   summary-table}
+         [:span (if value value [:i.fa.fa-ban.mostly-transparent])]]))))
 
 (defn table-row [row] (into [:tr] (map (fn [c] [table-cell c])) row))

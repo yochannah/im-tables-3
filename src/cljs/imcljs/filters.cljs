@@ -122,15 +122,16 @@
 (defn get-parts
   "Get all of the different parts of an intermine query and group them by type"
   [model query]
-  (group-by :type
-            (distinct
-              (map (fn [path]
-                     (assoc {}
-                       :type (im-type model path)
-                       :path (str (trim-path-to-class model path) ".id")
-                       :query {:select [(str (trim-path-to-class model path) ".id")]
-                               :where  (:where query)}))
-                   (:select query)))))
+  (let [query (sterilize-query query)]
+    (group-by :type
+              (distinct
+                (map (fn [path]
+                       (assoc {}
+                         :type (im-type model path)
+                         :path (str (trim-path-to-class model path) ".id")
+                         :query {:select [(str (trim-path-to-class model path) ".id")]
+                                 :where  (:where query)}))
+                     (:select query))))))
 
 
 

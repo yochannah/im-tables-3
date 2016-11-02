@@ -6,6 +6,7 @@
             [im-tables.effects]
             [imcljs.search :as search]
             [imcljs.assets :as assets]
+            [imcljs.filters :as filters]
             [oops.core :refer [oapply oget]]
             [clojure.string :refer [split join]]))
 
@@ -26,6 +27,7 @@
 (reg-event-fx
   :main/save-query-response
   (fn [{db :db} [_ results]]
+    (.debug js/console (filters/deconstruct-query (get-in db [:assets :model]) (get-in db [:query])))
     {:db         (assoc db :query-response results)
      :dispatch-n (into [] (map (fn [view] [:main/summarize-column view]) (get results :views)))}))
 

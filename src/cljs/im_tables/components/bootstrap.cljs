@@ -77,14 +77,16 @@
        :reagent-render
        (fn [[element attributes & rest]]
          [element (-> attributes
-                      (assoc :on-mouse-enter (fn []
-                                               (do
-                                                 (if-let [f (:on-mouse-enter attributes)] (f))
-                                                 (reset! show? true))))
-                      (assoc :on-mouse-leave (fn [x]
-                                               (do
-                                                 (if-let [f (:on-mouse-leave attributes)] (f))
-                                                 (reset! show? false)))))
+                      (assoc :on-mouse-enter
+                             (fn []
+                               (do
+                                 (if-let [f (:on-mouse-enter attributes)] (f))
+                                 (reset! show? true))))
+                      (assoc :on-mouse-leave
+                             (fn [x]
+                               (do
+                                 (if-let [f (:on-mouse-leave attributes)] (f))
+                                 (reset! show? false)))))
           (if @show? [inner-tooltip @mystate show? (:data-content attributes)])
           rest])})))
 

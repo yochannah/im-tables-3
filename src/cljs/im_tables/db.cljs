@@ -13,6 +13,7 @@
                         :value "FlyMine_AlzheimersUseCase"}]}
    :settings {:pagination {:start 0
                            :limit 10}}
+   :assets {:model {}}
    :cache    {:summaries {}
               :summary   {}
               :selection {}}})
