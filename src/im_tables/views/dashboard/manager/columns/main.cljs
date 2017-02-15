@@ -1,6 +1,7 @@
 (ns im-tables.views.dashboard.manager.columns.main
   (:require [re-frame.core :refer [subscribe dispatch]]
             [reagent.core :as reagent]
+            [im-tables.components.bootstrap :refer [modal]]
             [inflections.core :refer [plural]]))
 
 (defn tree-node []
@@ -41,32 +42,34 @@
       [:div
        [tree-node loc (keyword (:from query)) (get-in model [:classes (keyword (:from query))]) model [(:from query)] selected views]])))
 
-(defn my-modal [loc]
+(defn add-column-modal [loc]
   (let [model    (subscribe [:assets/model loc])
         selected (subscribe [:tree-view/selection loc])
         query    (subscribe [:main/query loc])]
     (fn [loc]
-     [:div#myModal.modal.fade {:role "dialog"}
-      [:div.modal-dialog
-       [:div.modal-content
-        [:div.modal-header [:h3 "Add Columns"]]
-        [:div.modal-body.max-height-500
-         [tree-view loc @model @query @selected]]
-        [:div.modal-footer
-         [:div.btn-toolbar.pull-right
-          [:button.btn.btn-default
-           {:data-dismiss "modal"}
-           "Cancel"]
-          [:button.btn.btn-success
-           {:data-dismiss "modal"
-            :disabled (< (count @selected) 1)
-            :on-click (fn [] (dispatch [:tree-view/merge-new-columns loc]))}
-           (str "Add " (if (> (count @selected) 0) (str (count @selected) " ")) "columns")]]]]]])))
+      [modal
+       {:header
+         [:h3 "Add Columns"]
+        :body
+          [:div.modal-body
+            [tree-view loc @model @query @selected]]
+        :footer
+          [:div.btn-toolbar.pull-right
+            [:button.btn.btn-default
+              {:data-dismiss "modal"}
+              "Cancel"]
+            [:button.btn.btn-success
+              {:data-dismiss "modal"
+               :disabled (< (count @selected) 1)
+               :on-click (fn [] (dispatch [:tree-view/merge-new-columns loc]))}
+              (str "Add " (if (> (count @selected) 0) (str (count @selected) " ")) "columns")]]
+            }]
+     )))
 
 
 (defn main []
   (fn [loc]
-    [my-modal loc]))
+    [add-column-modal loc]))
 
 ;;;;;;;;;;;;;;;;;
 

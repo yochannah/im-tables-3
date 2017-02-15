@@ -105,7 +105,7 @@
 
 (defn modal []
   (fn [{:keys [header body footer]}]
-    [:div#testModal.modal.fade {:role "dialog"}
+    [:div#testModal.modal.im-table-modal.fade {:role "dialog"}
      [:div.modal-dialog
       [:div.modal-content
        [:div.modal-header header]
