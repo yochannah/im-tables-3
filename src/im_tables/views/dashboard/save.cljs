@@ -53,7 +53,7 @@
               (map (fn [[path query]]
                      [:li [:a
                            {:data-toggle "modal"
-                            :data-target "#testModal"
+                            :data-target "#imTablesModal"
                             :on-click    (fn [] (dispatch [:prep-modal loc
                                                            (generate-dialog loc
                                                                             {:query query
@@ -64,7 +64,7 @@
   (fn [loc model path {:keys [query count]}]
     [:li
      {:data-toggle "modal"
-      :data-target "#testModal"
+      :data-target "#imTablesModal"
       :on-click    (fn [] (dispatch [:prep-modal loc
                                      (generate-dialog loc
                                                       {:query query

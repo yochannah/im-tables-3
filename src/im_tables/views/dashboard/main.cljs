@@ -18,7 +18,7 @@
         [:div.btn-group
          [:button.btn.btn-default
           {:data-toggle "modal"
-           :data-target "#testModal"}
+           :data-target "#imTablesModal"}
            [:i.fa.fa-columns] " Add Columns"]]
         [:div.btn-group
          [save/main loc]]]]
