@@ -24,7 +24,7 @@
   (re-frame/dispatch-sync [:initialize-db
                            nil
                            {:service {:root "www.flymine.org/query"}
-                            :query (query/sterilize-query db/outer-join-query)}])
+                            :query (query/sterilize-query db/outer-join-query-2)}])
 
   (dev-setup)
   (mount-root))
